@@ -6,7 +6,7 @@ import org.openqa.selenium.support.pagefactory.AjaxElementLocator;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 
 public class SearchResult {
-    
+    WebDriver driver;
     public SearchResult(WebDriver driver){
         this.driver = driver;
         PageFactory.initElements(new AjaxElementLocatorFactory(driver,10), this);
