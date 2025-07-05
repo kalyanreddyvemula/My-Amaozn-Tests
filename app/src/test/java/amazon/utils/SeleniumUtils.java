@@ -45,4 +45,8 @@ public class SeleniumUtils {
         FileUtils.copyFile(sourcFile, destinationFile);
         return  filepath;
     }
+
+    public static void pause(long time) throws InterruptedException{
+        Thread.sleep(time);
+    }
 }
