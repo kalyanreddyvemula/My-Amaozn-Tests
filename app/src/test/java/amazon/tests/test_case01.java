@@ -45,26 +45,18 @@ public class test_case01 extends BaseTest {
         logInfo("Clicked the value");
         hpage.searchValue();
 
-        logInfo("Scraping the prices of PAGE1");
+
+        for(int i=1; i<3; i++){
+        logInfo("Scraping the prices of PAGE"+i);
         System.out.println(sResult.priceScrape());
-        
 
-
-        logInfo("Going to PAGE 2");
+        logInfo("Going to PAGE"+(i+1));
         sResult.clickNextPAGE();
 
         pause(10000);
 
-        logInfo("Scraping the prices of PAGE1");
-        System.out.println(sResult.priceScrape());
 
-        logInfo("Going to PAGE 2");
-        sResult.clickNextPAGE();
-
-        pause(10000);
-        logInfo("Scraping the prices of PAGE3");
-        System.out.println(sResult.priceScrape());
-
+        }
         
 
         soft.assertAll();

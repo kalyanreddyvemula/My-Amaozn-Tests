@@ -25,9 +25,7 @@ public class SearchResult {
     WebElement nextPage;
 
     
-    public List<WebElement> getPriceElements() {
-        return priceList;
-    }
+    
     public List<String> priceScrape() {
         List<String> prices = new ArrayList<>();
 
@@ -35,7 +33,7 @@ public class SearchResult {
             String rawPrice = price.getAttribute("innerText").trim();  
 
             if (!rawPrice.isEmpty()) {
-                // Remove currency symbol and commas, keep only digits
+                
                 String cleanedPrice = rawPrice.replaceAll("[^0-9]", "");
                 prices.add(cleanedPrice);
             }
