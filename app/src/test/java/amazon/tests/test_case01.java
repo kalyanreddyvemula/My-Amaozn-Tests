@@ -4,7 +4,7 @@ package amazon.tests;
 
 import java.util.List;
 
-
+import org.checkerframework.checker.units.qual.s;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -31,7 +31,7 @@ public class test_case01 extends BaseTest {
         sResult = new SearchResult(driver);
     }
 
-    @Test
+    @Test(priority = 1)
     public void testcase01() throws InterruptedException{
 
         soft = new SoftAssert();
@@ -39,14 +39,14 @@ public class test_case01 extends BaseTest {
         logInfo("Verifying the the PAGE TITLE");
         soft.assertTrue(hpage.verifyTitle(), "Title missmatched");
         
-        logInfo("Enter produc name in search");
+        logInfo("Enter product name in search");
         hpage.searchProduct("Laptops");
 
         logInfo("Clicked the value");
         hpage.searchValue();
 
 
-        for(int i=1; i<3; i++){
+        for(int i=1; i<=3; i++){
         logInfo("Scraping the prices of PAGE"+i);
         System.out.println(sResult.priceScrape());
 
@@ -60,5 +60,30 @@ public class test_case01 extends BaseTest {
         
 
         soft.assertAll();
+    }
+
+    @Test(priority = 2)
+    public void test_case02() throws InterruptedException{
+
+        
+
+       
+        logInfo("Entering into amazon website");
+        
+        
+        logInfo("Enter product name in search");
+        hpage.searchProduct("HeadPhones");
+
+        logInfo("Clicked the value");
+        hpage.searchValue();
+
+        Thread.sleep(5000);
+
+        logInfo("Extract the ratings and converting it to float numbers");
+        System.out.println(sResult.ratingOFproducts());
+
+        Thread.sleep(4000);
+
+        
     }
 }

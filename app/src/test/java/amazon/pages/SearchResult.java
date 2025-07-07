@@ -1,14 +1,22 @@
 package amazon.pages;
 
+import java.time.Duration;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocator;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class SearchResult {
     WebDriver driver;
@@ -24,7 +32,9 @@ public class SearchResult {
     @FindBy(xpath =    "(//li[@class = 's-list-item-margin-right-adjustment'])[4]")
     WebElement nextPage;
 
-    
+    @FindBy(xpath = "//div[@class='puisg-row']//span[@class='a-icon-alt']")
+    List<WebElement> ratings;
+
     
     public List<String> priceScrape() {
         List<String> prices = new ArrayList<>();
@@ -43,7 +53,48 @@ public class SearchResult {
     }
 
 
-    public void clickNextPAGE(){
+    public void clickNextPAGE() throws InterruptedException{
+
+       Actions scrollAction = new Actions(driver);
+        scrollAction.moveToElement(nextPage).perform();
+
+        Thread.sleep(3000);
+
+  //   ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", nextPage);
+
+        
+        
         nextPage.click();
     }
+
+
+ public List<Float> ratingOFproducts() {
+    List<Float> ratingOrder = new ArrayList<>();
+
+    System.out.println("Total ratings found: " + ratings.size());
+
+    for (WebElement likes : ratings) {
+        String rates = likes.getAttribute("innerText"); 
+
+        if (rates != null) {
+            rates = rates.trim();
+           // System.out.println("Raw rating text: '" + rates + "'");
+
+            if (!rates.isEmpty() && rates.matches("^[0-9.]+.*")) {
+                String floatPart = rates.split(" ")[0]; // extract "4.3"
+                try {
+                    Float rater = Float.parseFloat(floatPart);
+                    ratingOrder.add(rater);
+                } catch (NumberFormatException e) {
+                    System.out.println("Failed to parse: " + floatPart);
+                }
+            }
+        }
+    }
+
+    System.out.println("Final rating list: " + ratingOrder);
+    return ratingOrder;
+}
+ 
+
 }
