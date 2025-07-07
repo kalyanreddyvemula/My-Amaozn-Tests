@@ -30,7 +30,7 @@ public class productDetails {
     @FindBy(xpath = "//input[@aria-labelledby=\"GLUXZipUpdate-announce\"]")
     WebElement applyButton;
 
-    @FindBy(xpath = "//*[@id=\"mir-layout-DELIVERY_BLOCK-slot-SECONDARY_DELIVERY_MESSAGE_LARGE\"]/span")
+    @FindBy(xpath = "//*[@id=\"mir-layout-DELIVERY_BLOCK-slot-PRIMARY_DELIVERY_MESSAGE_LARGE\"]/span")
     WebElement textafterPIN;
 
 

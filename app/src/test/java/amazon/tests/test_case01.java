@@ -36,7 +36,7 @@ public class test_case01 extends BaseTest {
         pd = new productDetails(driver);
     }
 
-    @Test(priority = 1, enabled = false)
+    @Test(priority = 1 )
     public void testcase01() throws InterruptedException{
 
         soft = new SoftAssert();
@@ -67,7 +67,7 @@ public class test_case01 extends BaseTest {
         soft.assertAll();
     }
 
-    @Test(priority = 2, enabled = false)
+    @Test(priority = 2 )
     public void testcase02() throws InterruptedException{
 
         
@@ -93,7 +93,7 @@ public class test_case01 extends BaseTest {
     }
 
 
-    @Test(enabled = false)
+    @Test(priority = 3)
     public void testcase03() throws InterruptedException{
 
 
@@ -112,12 +112,7 @@ public class test_case01 extends BaseTest {
 
         logInfo("Clicking the product for more details");
         sResult.clickingProduct();
-
-      /*  logInfo("Entering the PINCODE");
-        pd.enterPincode(500081);
-
-        logInfo("Delivery information");
-        pd.getnotePIN();*/ 
+ 
 
         for(int i=0; i<pincode.size(); i++){
 
@@ -137,7 +132,7 @@ public class test_case01 extends BaseTest {
 
     }
 
-    @Test(enabled = true)
+    @Test(priority = 4)
     public void testcase04()throws InterruptedException{
 
         soft = new SoftAssert();
