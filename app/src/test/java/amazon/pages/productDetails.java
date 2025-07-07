@@ -32,10 +32,10 @@ public class productDetails {
 
     @FindBy(xpath = "//*[@id=\"mir-layout-DELIVERY_BLOCK-slot-SECONDARY_DELIVERY_MESSAGE_LARGE\"]/span")
     WebElement textafterPIN;
-    
 
 
-
+  
+ 
     public void enterPincode(int PIN)throws InterruptedException{
 
         pincodeForDelivery.click();
@@ -51,5 +51,11 @@ public class productDetails {
         String message = textafterPIN.getText();
         System.out.println(message);
     }
+   
+
+
+    
+
+
     
 }

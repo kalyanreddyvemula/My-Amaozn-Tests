@@ -16,6 +16,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocator;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class SearchResult {
@@ -38,6 +39,12 @@ public class SearchResult {
     @FindBy(xpath = "(//a[@class = 'a-link-normal s-line-clamp-4 s-link-style a-text-normal'])[3]")
     WebElement clickProduct;
 
+    @FindBy(xpath = "//div[@class = 'puisg-row']//span[@class = 'a-price-whole']")
+    List<WebElement> priceLH;
+
+    
+
+   
     
     public List<String> priceScrape() {
         List<String> prices = new ArrayList<>();
@@ -103,7 +110,38 @@ public void clickingProduct(){
     clickProduct.click();
 }
 
+public void sortByfeatures() throws InterruptedException{
 
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    WebElement dropdownTrigger  = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[@class='a-dropdown-prompt']")));
+    dropdownTrigger.click();
+
+    WebElement sortBySelect = wait.until(ExpectedConditions.elementToBeClickable(
+    By.xpath("//select[@id='s-result-sort-select']")));
+    Select select = new Select(sortBySelect);
+    select.selectByVisibleText("Price: Low to High");
+    
+
+}
  
+
+public List<Integer> lowtoHighPrice(){
+    List<Integer> prices = new ArrayList<>();
+    for(WebElement price : priceLH){
+        
+        String ex = price.getAttribute("innerText").trim();
+        String ex1 = ex.replaceAll("[^0-9]", "");
+        if(!ex1.isEmpty()){
+            try {
+                int pricevalue = Integer.parseInt(ex1);
+                prices.add(pricevalue);
+            } catch (Exception e) {
+                System.out.println("Skipping invalid price: " + ex);
+            }
+        }
+        
+    }
+    return prices;
+}
 
 }

@@ -93,7 +93,7 @@ public class test_case01 extends BaseTest {
     }
 
 
-    @Test(enabled = true)
+    @Test(enabled = false)
     public void testcase03() throws InterruptedException{
 
 
@@ -136,4 +136,24 @@ public class test_case01 extends BaseTest {
 
 
     }
+
+    @Test(enabled = true)
+    public void testcase04()throws InterruptedException{
+
+        soft = new SoftAssert();
+        logInfo("Entered webBrowser");
+        logInfo("Enter product name in search");
+        hpage.searchProduct("external hard drive");
+
+        logInfo("Clicked the value");
+        hpage.searchValue();
+
+        logInfo("Sorting the feature from LOW TO HIGH");
+        sResult.sortByfeatures();
+
+        pause(10000);
+        logInfo("Extracting the Prices");
+        System.out.println(sResult.lowtoHighPrice());
+    }
 }
+    
