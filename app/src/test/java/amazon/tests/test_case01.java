@@ -2,6 +2,7 @@ package amazon.tests;
 
 
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.checkerframework.checker.units.qual.s;
@@ -9,6 +10,7 @@ import org.openqa.selenium.WebElement;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
+
 import static amazon.utils.SeleniumUtils.*;
 
 import static amazon.utils.ExtentTestManager.*;
@@ -16,6 +18,7 @@ import static amazon.utils.ExtentTestManager.logInfo;
 
 import amazon.pages.HomePage;
 import amazon.pages.SearchResult;
+import amazon.pages.productDetails;
 
 
 
@@ -24,14 +27,16 @@ public class test_case01 extends BaseTest {
     HomePage hpage;
     SoftAssert soft;
     SearchResult sResult;
+    productDetails pd;
 
     @BeforeMethod
     public void setUpPages(){   
         hpage = new HomePage(driver);
         sResult = new SearchResult(driver);
+        pd = new productDetails(driver);
     }
 
-    @Test(priority = 1)
+    @Test(priority = 1, enabled = false)
     public void testcase01() throws InterruptedException{
 
         soft = new SoftAssert();
@@ -62,8 +67,8 @@ public class test_case01 extends BaseTest {
         soft.assertAll();
     }
 
-    @Test(priority = 2)
-    public void test_case02() throws InterruptedException{
+    @Test(priority = 2, enabled = false)
+    public void testcase02() throws InterruptedException{
 
         
 
@@ -85,5 +90,50 @@ public class test_case01 extends BaseTest {
         Thread.sleep(4000);
 
         
+    }
+
+
+    @Test(enabled = true)
+    public void testcase03() throws InterruptedException{
+
+
+        List<Integer> pincode = Arrays.asList(500081, 110001, 400001);
+        
+
+        logInfo("Entered webBrowser");
+        logInfo("Enter product name in search");
+        hpage.searchProduct("Table lamps");
+
+        logInfo("Clicked the value");
+        hpage.searchValue();
+
+        pause(5000);
+        
+
+        logInfo("Clicking the product for more details");
+        sResult.clickingProduct();
+
+      /*  logInfo("Entering the PINCODE");
+        pd.enterPincode(500081);
+
+        logInfo("Delivery information");
+        pd.getnotePIN();*/ 
+
+        for(int i=0; i<pincode.size(); i++){
+
+            int pin = pincode.get(i);
+            logInfo("Entering the PINCODE"+pin);
+            pd.enterPincode(pin);
+
+
+            
+
+            logInfo("Prinitng Delivery information for: " + pin);
+            pd.getnotePIN();
+
+            pause(5000);
+        }
+
+
     }
 }

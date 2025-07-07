@@ -35,6 +35,9 @@ public class SearchResult {
     @FindBy(xpath = "//div[@class='puisg-row']//span[@class='a-icon-alt']")
     List<WebElement> ratings;
 
+    @FindBy(xpath = "(//a[@class = 'a-link-normal s-line-clamp-4 s-link-style a-text-normal'])[3]")
+    WebElement clickProduct;
+
     
     public List<String> priceScrape() {
         List<String> prices = new ArrayList<>();
@@ -95,6 +98,12 @@ public class SearchResult {
     System.out.println("Final rating list: " + ratingOrder);
     return ratingOrder;
 }
+
+public void clickingProduct(){
+    clickProduct.click();
+}
+
+
  
 
 }
