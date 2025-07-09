@@ -33,7 +33,7 @@ public class productDetails {
     @FindBy(xpath = "//*[@id=\"mir-layout-DELIVERY_BLOCK-slot-PRIMARY_DELIVERY_MESSAGE_LARGE\"]/span")
     WebElement textafterPIN;
 
-
+   
   
  
     public void enterPincode(int PIN)throws InterruptedException{

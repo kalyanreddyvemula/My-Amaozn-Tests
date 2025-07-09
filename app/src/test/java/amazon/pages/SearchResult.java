@@ -42,6 +42,8 @@ public class SearchResult {
     @FindBy(xpath = "//div[@class = 'puisg-row']//span[@class = 'a-price-whole']")
     List<WebElement> priceLH;
 
+     @FindBy(xpath = "//h2[@class = 'a-size-medium a-spacing-none a-color-base a-text-normal']/span")
+    List<WebElement> productNames;
     
 
    
@@ -143,5 +145,17 @@ public List<Integer> lowtoHighPrice(){
     }
     return prices;
 }
+
+
+public List<String> earBuds(){
+    List<String> earB = new ArrayList<>();
+    for(WebElement ebuds : productNames){
+        String ears = ebuds.getText().toLowerCase().trim();
+        earB.add(ears);
+    }
+    return earB;
+}
+
+
 
 }

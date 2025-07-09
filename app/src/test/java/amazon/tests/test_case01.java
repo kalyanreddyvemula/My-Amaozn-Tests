@@ -36,7 +36,7 @@ public class test_case01 extends BaseTest {
         pd = new productDetails(driver);
     }
 
-    @Test(priority = 1 )
+  //  @Test(priority = 1 )
     public void testcase01() throws InterruptedException{
 
         soft = new SoftAssert();
@@ -67,7 +67,7 @@ public class test_case01 extends BaseTest {
         soft.assertAll();
     }
 
-    @Test(priority = 2 )
+//    @Test(priority = 2 )
     public void testcase02() throws InterruptedException{
 
         
@@ -93,7 +93,7 @@ public class test_case01 extends BaseTest {
     }
 
 
-    @Test(priority = 3)
+ //   @Test(priority = 3)
     public void testcase03() throws InterruptedException{
 
 
@@ -132,7 +132,7 @@ public class test_case01 extends BaseTest {
 
     }
 
-    @Test(priority = 4)
+//    @Test(priority = 4)
     public void testcase04()throws InterruptedException{
 
         soft = new SoftAssert();
@@ -149,6 +149,29 @@ public class test_case01 extends BaseTest {
         pause(10000);
         logInfo("Extracting the Prices");
         System.out.println(sResult.lowtoHighPrice());
+    }
+
+    @Test
+    public void testcase05(){
+       // soft = new SoftAssert();
+        logInfo("Entered webBrowser");
+        logInfo("Enter product name in search");
+        hpage.searchProduct("Wireless earbuds");
+
+        logInfo("Clicked the value");
+        hpage.searchValue();
+
+        List<String> ears = sResult.earBuds();
+        int limit = Math.min(ears.size(), 10);
+        for(int i =0; i<limit; i++){
+          String eb =  ears.get(i);
+          System.out.println(i + " - " +eb);
+          if(eb.contains("earbuds")){
+            logInfo("Earbuds present in all product: " +( i+1));
+          }else{
+            logFail("Match not found: "+(i+1));
+          }
+        }
     }
 }
     
